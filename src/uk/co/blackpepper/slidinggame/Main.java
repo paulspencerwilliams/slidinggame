@@ -29,7 +29,6 @@ public class Main {
                 push ();
             }
             System.out.println(String.format("redSquare=[%s,%s],emptySquare=[%s,%s]", redSquare.x, redSquare.y, emptySquare.x, emptySquare.y));
-            moves++;
         }
         System.out.println(String.format("It took %s moves. Type any key to stop", moves));
         System.in.read();
@@ -59,12 +58,24 @@ public class Main {
         }
     }
 
+    private static void pullEmptySpace() {
+        if (emptySquare.x == emptySquare.y + 1)
+        {
+            pullEmptyUp();
+        }
+        else
+        {
+            pullEmptyLeft();
+        }
+    }
+
     private static void pullRedRight() {
         if (isEmptySquareToTheRight())
         {
             System.out.println("pulling red right");
             redSquare.x = redSquare.x + 1;
             emptySquare.x = emptySquare.x - 1;
+            moves++;
         }
         else if (isEmptySquareAbove())
         {
@@ -85,6 +96,7 @@ public class Main {
             System.out.println("pulling red down");
             redSquare.y = redSquare.y + 1;
             emptySquare.y = emptySquare.y - 1;
+            moves++;
         }
         else if (isEmptySquareToTheLeft())
         {
@@ -100,18 +112,22 @@ public class Main {
 
     private static void pullEmptyLeft() {
         emptySquare.x--;
+        moves++;
     }
 
     private static void pullEmptyUp() {
         emptySquare.y--;
+        moves++;
     }
 
     private static void pullEmptyRight() {
         emptySquare.x++;
+        moves++;
     }
 
     private static void pullEmptyDown() {
         emptySquare.y++;
+        moves++;
     }
 
 
@@ -136,16 +152,7 @@ public class Main {
         return emptySquare.x == redSquare.x -1 && emptySquare.y == redSquare.y;
     }
 
-    private static void pullEmptySpace() {
-        if (emptySquare.x == emptySquare.y + 1)
-        {
-            pullEmptyUp();
-        }
-        else
-        {
-            pullEmptyLeft();
-        }
-    }
+
 
 
 
